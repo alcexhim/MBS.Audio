@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UniversalEditor.Accessors.File;
+using UniversalEditor;
+using UniversalEditor.Accessors;
 using UniversalEditor.DataFormats.Multimedia.Audio.Waveform.MicrosoftWave;
 using UniversalEditor.ObjectModels.Multimedia.Audio.Waveform;
 
@@ -134,7 +135,7 @@ namespace Surodoine.Metronome
                 string filetitle = System.IO.Path.GetFileNameWithoutExtension(filename);
                 WaveformAudioObjectModel wave = new WaveformAudioObjectModel();
                 MicrosoftWaveDataFormat wav = new MicrosoftWaveDataFormat();
-                FileAccessor.Load(filename, wave, wav, true);
+                Document.Load(wave, wav, new FileAccessor(filename, false, false), true);
 
                 waves.Add(filetitle, wave);
             }
