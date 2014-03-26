@@ -58,7 +58,7 @@
       <Project>{a92d520b-ffa3-4464-8cf6-474d18959e03}</Project>
       <Name>UniversalEditor.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UniversalEditor\Plugins\UniversalEditor.Plugins.Multimedia\UniversalEditor.Plugins.Multimedia.csproj">
+    <ProjectReference Include="..\..\UniversalEditor\CSharp\Plugins\UniversalEditor.Plugins.Multimedia\UniversalEditor.Plugins.Multimedia.csproj">
       <Project>{BE4D0BA3-0888-42A5-9C09-FC308A4509D2}</Project>
       <Name>UniversalEditor.Plugins.Multimedia</Name>
     </ProjectReference>
