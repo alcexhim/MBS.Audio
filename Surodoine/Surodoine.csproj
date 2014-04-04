@@ -62,6 +62,10 @@
       <Project>{30467e5c-05bc-4856-aadc-13906ef4cadd}</Project>
       <Name>UniversalEditor.Essential</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\UniversalEditor\CSharp\Plugins\UniversalEditor.Plugins.Multimedia\UniversalEditor.Plugins.Multimedia.csproj">
+      <Project>{be4d0ba3-0888-42a5-9c09-fc308a4509d2}</Project>
+      <Name>UniversalEditor.Plugins.Multimedia</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="PortAudio.dll">
