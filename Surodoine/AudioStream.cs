@@ -12,14 +12,6 @@ namespace Surodoine
 
         private int mvarOutputChannelCount = 0;
 
-        public AudioStream()
-            : this(AudioDevice.DefaultInput, AudioDevice.DefaultOutput, AudioSampleFormat.Int16)
-        {
-        }
-        public AudioStream(double sampleRate)
-            : this(AudioDevice.DefaultInput, AudioDevice.DefaultOutput, AudioSampleFormat.Int16, sampleRate)
-        {
-        }
         public AudioStream(AudioDevice inputDevice, AudioDevice outputDevice, AudioSampleFormat sampleFormat)
             : this(inputDevice, outputDevice, sampleFormat, sampleFormat)
         {
@@ -56,9 +48,6 @@ namespace Surodoine
         {
             Internal.PortAudio.Structures.PaStreamParameters inputParameters = new Internal.PortAudio.Structures.PaStreamParameters();
             Internal.PortAudio.Structures.PaStreamParameters outputParameters = new Internal.PortAudio.Structures.PaStreamParameters();
-
-            if (inputDevice == null) inputDevice = AudioDevice.DefaultInput;
-            if (outputDevice == null) outputDevice = AudioDevice.DefaultOutput;
 
             if (inputDevice != null)
             {
@@ -173,7 +162,7 @@ namespace Surodoine
 
         public void Write(short[] buffer)
         {
-            Internal.PortAudio.Constants.PaError result = Internal.PortAudio.Methods.Pa_WriteStream(mvarHandle, buffer, (uint)buffer.Length);
+            Internal.PortAudio.Constants.PaError result = Internal.PortAudio.Methods.Pa_WriteStream(mvarHandle, buffer, (uint)(buffer.Length));
             Internal.PortAudio.Methods.Pa_ResultToException(result);
         }
 

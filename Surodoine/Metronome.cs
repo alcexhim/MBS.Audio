@@ -47,7 +47,9 @@ namespace Surodoine.Metronome
         private void _thread_ThreadStart()
         {
             WaveformAudioObjectModel click = waves["Click"];
-            AudioStream stream = new AudioStream(AudioDevice.DefaultInput, 2, AudioSampleFormat.Int16, AudioDevice.DefaultOutput, click.Header.ChannelCount, AudioSampleFormat.Int16, click.Header.SampleRate * click.Header.ChannelCount, 0, Surodoine.AudioStreamFlags.ClipOff);
+			using (AudioEngine ae = new AudioEngine())
+			{ 
+			AudioStream stream = new AudioStream(ae.DefaultInput, 2, AudioSampleFormat.Int16, ae.DefaultOutput, click.Header.ChannelCount, AudioSampleFormat.Int16, click.Header.SampleRate * click.Header.ChannelCount, 0, Surodoine.AudioStreamFlags.ClipOff);
 
             WaveformAudioObjectModel one = waves["One"];
             WaveformAudioObjectModel two = waves["Two"];
@@ -72,44 +74,45 @@ namespace Surodoine.Metronome
 
             int icountoff = 0;
 
-            while (true)
-            {
-                // short[] rawSamples = (click.RawSamples.Clone() as short[]);
-                short[] rawSamples = click.RawSamples;
+				while (true)
+				{
+					// short[] rawSamples = (click.RawSamples.Clone() as short[]);
+					short[] rawSamples = click.RawSamples.RawData;
 
-                if (icountoff < countoffs.Length)
-                {
-                    WaveformAudioObjectModel countoff = countoffs[icountoff];
-                    if (countoff != null)
-                    {
-                        rawSamples = countoff.RawSamples;
-                        /*
-                        // mix the countoff into the click
-                        if (countoff.RawSamples.Length > click.RawSamples.Length)
-                        {
-                            rawSamples = (countoff.RawSamples.Clone() as short[]);
-                            for (int i = 0; i < click.RawSamples.Length; i++)
-                            {
-                                rawSamples[i] = (short)((click.RawSamples[i] + rawSamples[i]) - ((click.RawSamples[i] + rawSamples[i]) / short.MaxValue));
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < rawSamples.Length; i++)
-                            {
-                                rawSamples[i] = (short)((countoff.RawSamples[i] + rawSamples[i]) - ((countoff.RawSamples[i] + rawSamples[i]) / short.MaxValue));
-                            }
-                        }
-                        */
-                    }
-                }
+					if (icountoff < countoffs.Length)
+					{
+						WaveformAudioObjectModel countoff = countoffs[icountoff];
+						if (countoff != null)
+						{
+							rawSamples = countoff.RawSamples.RawData;
+							/*
+							// mix the countoff into the click
+							if (countoff.RawSamples.Length > click.RawSamples.Length)
+							{
+								rawSamples = (countoff.RawSamples.Clone() as short[]);
+								for (int i = 0; i < click.RawSamples.Length; i++)
+								{
+									rawSamples[i] = (short)((click.RawSamples[i] + rawSamples[i]) - ((click.RawSamples[i] + rawSamples[i]) / short.MaxValue));
+								}
+							}
+							else
+							{
+								for (int i = 0; i < rawSamples.Length; i++)
+								{
+									rawSamples[i] = (short)((countoff.RawSamples[i] + rawSamples[i]) - ((countoff.RawSamples[i] + rawSamples[i]) / short.MaxValue));
+								}
+							}
+							*/
+						}
+					}
 
-                stream.Write(rawSamples);
-                OnTick(EventArgs.Empty);
+					stream.Write(rawSamples);
+					OnTick(EventArgs.Empty);
 
-                System.Threading.Thread.Sleep(ms - 30);
-                
-                if (icountoff <= countoffs.Length) icountoff++;
+					System.Threading.Thread.Sleep(ms - 30);
+
+					if (icountoff <= countoffs.Length) icountoff++;
+				}
             }
         }
 
@@ -152,7 +155,7 @@ namespace Surodoine.Metronome
                 short[] rawSamples = null;
                 if (countoff.RawSamples.Length > click.RawSamples.Length)
                 {
-                    rawSamples = countoff.RawSamples;
+                    rawSamples = countoff.RawSamples.RawData;
                     for (int i = 0; i < click.RawSamples.Length; i++)
                     {
                         rawSamples[i] = (short)((click.RawSamples[i] + rawSamples[i]) - ((click.RawSamples[i] + rawSamples[i]) / (short.MaxValue + 1)));
@@ -165,7 +168,7 @@ namespace Surodoine.Metronome
                     {
                         rawSamples[i] = (short)((countoff.RawSamples[i] + rawSamples[i]) - ((countoff.RawSamples[i] + rawSamples[i]) / (short.MaxValue + 1)));
                     }
-                    countoff.RawSamples = rawSamples;
+                    countoff.RawSamples = new WaveformAudioSamples(rawSamples);
                 }
             }
 

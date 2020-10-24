@@ -7,7 +7,7 @@ namespace Surodoine
 {
     public class AudioDevice
     {
-        private AudioDevice(int handle)
+        internal AudioDevice(int handle)
         {
             mvarHandle = handle;
 
@@ -66,40 +66,8 @@ namespace Surodoine
         private double mvarDefaultSampleRate = 0;
         public double DefaultSampleRate { get { return mvarDefaultSampleRate; } }
 
-
-        static AudioDevice()
-        {
-            int defaultInputDeviceHandle = Internal.PortAudio.Methods.Pa_GetDefaultInputDevice();
-            int defaultOutputDeviceHandle = Internal.PortAudio.Methods.Pa_GetDefaultOutputDevice();
-            mvarDefaultInput = new AudioDevice(defaultInputDeviceHandle);
-            mvarDefaultOutput = new AudioDevice(defaultOutputDeviceHandle);
-        }
-
-        #region Static members
         private static AudioDevice mvarNone = null;
         public static AudioDevice None { get { return mvarNone; } }
-
-        private static AudioDevice mvarDefaultInput = null;
-        public static AudioDevice DefaultInput
-        {
-            get
-            {
-                int defaultOutputDeviceHandle = Internal.PortAudio.Methods.Pa_GetDefaultInputDevice();
-                mvarDefaultOutput = new AudioDevice(defaultOutputDeviceHandle);
-                return mvarDefaultOutput;
-            }
-        }
-        private static AudioDevice mvarDefaultOutput = null;
-        public static AudioDevice DefaultOutput
-        {
-            get
-            {
-                int defaultOutputDeviceHandle = Internal.PortAudio.Methods.Pa_GetDefaultOutputDevice();
-                mvarDefaultOutput = new AudioDevice(defaultOutputDeviceHandle);
-                return mvarDefaultOutput;
-            }
-        }
-        #endregion
 
         private int mvarHandle = 0;
         public int Handle { get { return mvarHandle; } }
