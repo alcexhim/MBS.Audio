@@ -8,8 +8,8 @@
     <ProjectGuid>{E0897B7B-617A-4709-A4C6-FC0F6B441B2A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Surodoine</RootNamespace>
-    <AssemblyName>Surodoine</AssemblyName>
+    <RootNamespace>MBS.Audio</RootNamespace>
+    <AssemblyName>MBS.Audio</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -53,6 +53,7 @@
     <Compile Include="Internal\PortAudio\Windows\Methods.cs" />
     <Compile Include="Metronome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AudioPlayerStateChangedReason.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PortAudio.dll">

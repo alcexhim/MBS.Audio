@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Surodoine", "Surodoine\Surodoine.csproj", "{E0897B7B-617A-4709-A4C6-FC0F6B441B2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBS.Audio", "MBS.Audio\MBS.Audio.csproj", "{E0897B7B-617A-4709-A4C6-FC0F6B441B2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Surodoine.Metronome", "Surodoine.Metronome\Surodoine.Metronome.csproj", "{F6FEB13E-8622-4DBB-9A3C-C13FE68A1E3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBS.Audio.Metronome", "MBS.Audio.Metronome\MBS.Audio.Metronome.csproj", "{F6FEB13E-8622-4DBB-9A3C-C13FE68A1E3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalEditor.Core", "..\UniversalEditor\Libraries\UniversalEditor.Core\UniversalEditor.Core.csproj", "{A92D520B-FFA3-4464-8CF6-474D18959E03}"
 EndProject

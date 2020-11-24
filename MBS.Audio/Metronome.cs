@@ -7,7 +7,7 @@ using UniversalEditor.Accessors;
 using UniversalEditor.DataFormats.Multimedia.Audio.Waveform.MicrosoftWave;
 using UniversalEditor.ObjectModels.Multimedia.Audio.Waveform;
 
-namespace Surodoine.Metronome
+namespace MBS.Audio.Metronome
 {
     public class Metronome
     {
@@ -49,7 +49,7 @@ namespace Surodoine.Metronome
             WaveformAudioObjectModel click = waves["Click"];
 			using (AudioEngine ae = new AudioEngine())
 			{ 
-			AudioStream stream = new AudioStream(ae.DefaultInput, 2, AudioSampleFormat.Int16, ae.DefaultOutput, click.Header.ChannelCount, AudioSampleFormat.Int16, click.Header.SampleRate * click.Header.ChannelCount, 0, Surodoine.AudioStreamFlags.ClipOff);
+			AudioStream stream = new AudioStream(ae.DefaultInput, 2, AudioSampleFormat.Int16, ae.DefaultOutput, click.Header.ChannelCount, AudioSampleFormat.Int16, click.Header.SampleRate * click.Header.ChannelCount, 0, MBS.Audio.AudioStreamFlags.ClipOff);
 
             WaveformAudioObjectModel one = waves["One"];
             WaveformAudioObjectModel two = waves["Two"];

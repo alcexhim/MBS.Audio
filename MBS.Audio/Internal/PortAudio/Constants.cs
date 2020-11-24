@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Surodoine.Internal.PortAudio
+namespace MBS.Audio.Internal.PortAudio
 {
     public static class Constants
     {

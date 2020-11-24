@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Surodoine.Internal.PortAudio
+namespace MBS.Audio.Internal.PortAudio
 {
     public static class Delegates
     {

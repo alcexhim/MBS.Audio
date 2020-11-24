@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Surodoine.Internal.PortAudio.Windows
+namespace MBS.Audio.Internal.PortAudio.Linux
 {
     internal static class Methods
     {
-        private const string LIBRARY_FILENAME = "PortAudio.dll";
+        private const string LIBRARY_FILENAME = "libportaudio.so.2";
 
         #region Initialization/Termination
         [DllImport(LIBRARY_FILENAME)]

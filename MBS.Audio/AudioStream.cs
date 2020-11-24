@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Surodoine
+namespace MBS.Audio
 {
     public class AudioStream : System.IO.Stream
     {
