@@ -5,26 +5,22 @@ using System.Text;
 
 namespace MBS.Audio
 {
-    public class AudioEngine : IDisposable
+    public abstract class AudioEngine : IDisposable
     {
-        public void Initialize()
-        {
-            Internal.PortAudio.Constants.PaError result = Internal.PortAudio.Methods.Pa_Initialize();
-            Internal.PortAudio.Methods.Pa_ResultToException(result);
-
-			int defaultInputDeviceHandle = Internal.PortAudio.Methods.Pa_GetDefaultInputDevice();
-			Internal.PortAudio.Methods.Pa_ResultToException(result);
-
-			int defaultOutputDeviceHandle = Internal.PortAudio.Methods.Pa_GetDefaultOutputDevice();
-			Internal.PortAudio.Methods.Pa_ResultToException(result);
-			mvarDefaultInput = new AudioDevice(defaultInputDeviceHandle);
-			mvarDefaultOutput = new AudioDevice(defaultOutputDeviceHandle);
+		public void Initialize()
+		{
+			InitializeInternal();
 		}
+		protected abstract void InitializeInternal();
+
 		public void Terminate()
 		{
-			Internal.PortAudio.Constants.PaError result = Internal.PortAudio.Methods.Pa_Terminate();
-			Internal.PortAudio.Methods.Pa_ResultToException(result);
+			TerminateInternal();
 		}
+		protected abstract void TerminateInternal();
+
+		public abstract Guid ID { get; }
+		public abstract string Title { get; }
 
 		public void Dispose()
 		{
@@ -33,27 +29,6 @@ namespace MBS.Audio
 		}
 
 		private bool _disposed = false;
-
-		private AudioDevice mvarDefaultInput = null;
-		public AudioDevice DefaultInput
-		{
-			get
-			{
-				int defaultOutputDeviceHandle = Internal.PortAudio.Methods.Pa_GetDefaultInputDevice();
-				mvarDefaultOutput = new AudioDevice(defaultOutputDeviceHandle);
-				return mvarDefaultOutput;
-			}
-		}
-		private AudioDevice mvarDefaultOutput = null;
-		public AudioDevice DefaultOutput
-		{
-			get
-			{
-				int defaultOutputDeviceHandle = Internal.PortAudio.Methods.Pa_GetDefaultOutputDevice();
-				mvarDefaultOutput = new AudioDevice(defaultOutputDeviceHandle);
-				return mvarDefaultOutput;
-			}
-		}
 
 		protected virtual void Dispose(bool disposing)
 		{

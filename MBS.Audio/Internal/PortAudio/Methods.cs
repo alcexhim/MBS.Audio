@@ -142,7 +142,7 @@ namespace MBS.Audio.Internal.PortAudio
         }
         #endregion
         #region Stream Initialization
-        public static Constants.PaError Pa_OpenStream(out IntPtr stream, ref Structures.PaStreamParameters inputParameters, ref Structures.PaStreamParameters outputParameters, double sampleRate, uint framesPerBuffer, AudioStreamFlags streamFlags, Delegates.PaStreamCallbackDelegate streamCallback, IntPtr userData)
+        public static Constants.PaError Pa_OpenStream(out IntPtr stream, ref Structures.PaStreamParameters inputParameters, ref Structures.PaStreamParameters outputParameters, double sampleRate, uint framesPerBuffer, Audio.PortAudio.AudioStreamFlags streamFlags, Delegates.PaStreamCallbackDelegate streamCallback, IntPtr userData)
         {
             stream = IntPtr.Zero;
 

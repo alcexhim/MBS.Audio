@@ -28,7 +28,7 @@ namespace MBS.Audio.Internal.PortAudio.Linux
         #endregion
         #region Stream Initialization
         [DllImport(LIBRARY_FILENAME)]
-        public static extern Constants.PaError Pa_OpenStream(out IntPtr stream, ref Structures.PaStreamParameters inputParameters, ref Structures.PaStreamParameters outputParameters, double sampleRate, uint framesPerBuffer, AudioStreamFlags streamFlags, Delegates.PaStreamCallbackDelegate streamCallback, IntPtr userData);
+        public static extern Constants.PaError Pa_OpenStream(out IntPtr stream, ref Structures.PaStreamParameters inputParameters, ref Structures.PaStreamParameters outputParameters, double sampleRate, uint framesPerBuffer, Audio.PortAudio.AudioStreamFlags streamFlags, Delegates.PaStreamCallbackDelegate streamCallback, IntPtr userData);
         [DllImport(LIBRARY_FILENAME)]
         public static extern Constants.PaError Pa_OpenDefaultStream(out IntPtr stream, int numInputChannels, int numOutputChannels, uint sampleFormat, double sampleRate, uint framesPerBuffer, Delegates.PaStreamCallbackDelegate streamCallback, IntPtr userData);
         [DllImport(LIBRARY_FILENAME)]

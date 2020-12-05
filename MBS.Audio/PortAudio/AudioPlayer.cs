@@ -4,9 +4,9 @@ using System.Text;
 
 using UniversalEditor.ObjectModels.Multimedia.Audio.Waveform;
 
-namespace MBS.Audio
+namespace MBS.Audio.PortAudio
 {
-	public class AudioPlayer
+	public class AudioPlayer : ITransport
 	{
 		public bool IsPlaying { get { return mvarState != AudioPlayerState.Stopped; } }
 
@@ -18,7 +18,8 @@ namespace MBS.Audio
 		private AudioDevice mvarOutputDevice = AudioDevice.None;
 		public AudioDevice OutputDevice { get { return mvarOutputDevice; } set { mvarOutputDevice = value; } }
 
-		public event AudioPlayerStateChangedEventHandler StateChanged;
+		public event EventHandler<AudioPlayerStateChangedEventArgs> StateChanged;
+
 		protected virtual void OnStateChanged(AudioPlayerStateChangedEventArgs e)
 		{
 			StateChanged?.Invoke(this, e);
@@ -36,7 +37,7 @@ namespace MBS.Audio
 		}
 		public void Play(bool async)
 		{
-			if (mvarDocument == null) throw new NullReferenceException();
+			if (Document == null) throw new NullReferenceException();
 
 			if (PlayThread != null)
 			{
@@ -61,32 +62,42 @@ namespace MBS.Audio
 		}
 		public void Play(WaveformAudioObjectModel wave, bool async)
 		{
-			mvarDocument = wave;
+			Document = wave;
 			Play(async);
 		}
+
+		public double Volume { get; set; } = 0.5;
 
 		private long i = 0;
 		private void PlayThread_ThreadStart()
 		{
-			int bufferSize = 2;
-			using (AudioEngine ae = new AudioEngine())
+			int bufferSize = Document.Header.ChannelCount;
+			using (AudioEngine ae = new PortAudioEngine())
 			{
-				AudioStream audio = new AudioStream(ae.DefaultInput, 2, AudioSampleFormat.Int16, ae.DefaultOutput, mvarDocument.Header.ChannelCount, AudioSampleFormat.Int16, mvarDocument.Header.SampleRate * mvarDocument.Header.ChannelCount, 0, MBS.Audio.AudioStreamFlags.ClipOff);
+				AudioSampleFormat asf = AudioSampleFormat.Int16;
+				switch (Document.Header.BitsPerSample)
+				{
+					case 8: asf = AudioSampleFormat.Int8; break;
+					case 16: asf = AudioSampleFormat.Int16; break;
+					case 24: asf = AudioSampleFormat.Int24; break;
+					case 32: asf = AudioSampleFormat.Int32; break;
+				}
+				AudioStream audio = new AudioStream((ae as PortAudioEngine).DefaultInput, Document.Header.ChannelCount, asf, (ae as PortAudioEngine).DefaultOutput, Document.Header.ChannelCount, asf, Document.Header.SampleRate * Document.Header.ChannelCount, 0, AudioStreamFlags.None);
 
 				mvarState = AudioPlayerState.Playing;
 				OnStateChanged(new AudioPlayerStateChangedEventArgs(AudioPlayerState.Playing, AudioPlayerStateChangedReason.UserAction));
 
 				long start = 0;
 
-				mvarTimestamp = new AudioTimestamp((int)0, mvarDocument.Header.SampleRate * 2);
+				mvarTimestamp = AudioTimestamp.FromSamples((int)0, Document.Header.SampleRate * Document.Header.ChannelCount);
 
 				while (State != AudioPlayerState.Stopped)
 				{
 					if (State != AudioPlayerState.Paused)
 					{
-						for (i = mvarTimestamp.TotalSamples; i < mvarDocument.RawSamples.Length;)
+						for (i = mvarTimestamp.TotalSamples; i < Document.RawSamples.Length;)
 						{
-							short[] buffer = mvarDocument.RawSamples[(int)(i * bufferSize), bufferSize];
+							short[] buffer = Document.RawSamples[(int)(i * bufferSize), bufferSize];
 
 							/*
 							short sampleL = mvarDocument.RawSamples[mvarTimestamp.TotalSamples];
@@ -101,6 +112,11 @@ namespace MBS.Audio
 							mvarTimestamp.TotalSamples += 2;
 							*/
 
+							for (int j = 0; j < buffer.Length; j++)
+							{
+								buffer[j] = (byte)(Volume * buffer[j]);
+							}
+
 							audio.Write(buffer);
 							mvarTimestamp.TotalSamples += buffer.Length;
 													
@@ -110,7 +126,7 @@ namespace MBS.Audio
 						}
 					}
 					System.Threading.Thread.Sleep(500);
-					if (mvarTimestamp.TotalSamples >= mvarDocument.RawSamples.Length)
+					if (mvarTimestamp.TotalSamples >= Document.RawSamples.Length)
 					{
 						mvarState = AudioPlayerState.Stopped;
 						OnStateChanged(new AudioPlayerStateChangedEventArgs(mvarState, AudioPlayerStateChangedReason.SongEnded));
@@ -126,7 +142,7 @@ namespace MBS.Audio
 			mvarState = AudioPlayerState.Stopped;
 			OnStateChanged(new AudioPlayerStateChangedEventArgs(AudioPlayerState.Stopped, AudioPlayerStateChangedReason.UserAction));
 
-			mvarTimestamp = new AudioTimestamp((int)0, mvarDocument.Header.SampleRate * 2);
+			mvarTimestamp = AudioTimestamp.FromSamples((int)0, Document.Header.SampleRate * 2);
 		}
 
 		public void Pause()
@@ -141,10 +157,7 @@ namespace MBS.Audio
 			}
 		}
 
-		private WaveformAudioObjectModel mvarDocument = null;
-		public WaveformAudioObjectModel Document { get { return mvarDocument; } set { mvarDocument = value; } }
-
-		private int mvarChannelCount = 2;
-		public int ChannelCount { get { return mvarChannelCount; } set { mvarChannelCount = value; } }
+		public WaveformAudioObjectModel Document { get; set; } = null;
+		public int ChannelCount { get; set; } = 2;
 	}
 }

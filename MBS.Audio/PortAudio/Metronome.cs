@@ -7,7 +7,7 @@ using UniversalEditor.Accessors;
 using UniversalEditor.DataFormats.Multimedia.Audio.Waveform.MicrosoftWave;
 using UniversalEditor.ObjectModels.Multimedia.Audio.Waveform;
 
-namespace MBS.Audio.Metronome
+namespace MBS.Audio.PortAudio
 {
     public class Metronome
     {
@@ -47,32 +47,32 @@ namespace MBS.Audio.Metronome
         private void _thread_ThreadStart()
         {
             WaveformAudioObjectModel click = waves["Click"];
-			using (AudioEngine ae = new AudioEngine())
-			{ 
-			AudioStream stream = new AudioStream(ae.DefaultInput, 2, AudioSampleFormat.Int16, ae.DefaultOutput, click.Header.ChannelCount, AudioSampleFormat.Int16, click.Header.SampleRate * click.Header.ChannelCount, 0, MBS.Audio.AudioStreamFlags.ClipOff);
+			using (AudioEngine ae = new PortAudioEngine())
+			{
+				AudioStream stream = new AudioStream((ae as PortAudioEngine).DefaultInput, 2, AudioSampleFormat.Int16, (ae as PortAudioEngine).DefaultOutput, click.Header.ChannelCount, AudioSampleFormat.Int16, click.Header.SampleRate * click.Header.ChannelCount, 0, AudioStreamFlags.ClipOff);
 
-            WaveformAudioObjectModel one = waves["One"];
-            WaveformAudioObjectModel two = waves["Two"];
-            WaveformAudioObjectModel three = waves["Three"];
-            WaveformAudioObjectModel four = waves["Four"];
+	            WaveformAudioObjectModel one = waves["One"];
+	            WaveformAudioObjectModel two = waves["Two"];
+	            WaveformAudioObjectModel three = waves["Three"];
+	            WaveformAudioObjectModel four = waves["Four"];
 
-            WaveformAudioObjectModel[] countoffs = new WaveformAudioObjectModel[]
-            {
-                one,
-                null,
-                two,
-                null,
-                one,
-                two,
-                three,
-                four
-            };
-            
-            // 1/120 minutes per beat = 
-            double bpm = (1000 - (mvarTempo * ((double)500 / (double)120)));
-            int ms = (int)bpm;
+	            WaveformAudioObjectModel[] countoffs = new WaveformAudioObjectModel[]
+	            {
+	                one,
+	                null,
+	                two,
+	                null,
+	                one,
+	                two,
+	                three,
+	                four
+	            };
+	            
+	            // 1/120 minutes per beat = 
+	            double bpm = (1000 - (mvarTempo * ((double)500 / (double)120)));
+	            int ms = (int)bpm;
 
-            int icountoff = 0;
+	            int icountoff = 0;
 
 				while (true)
 				{
