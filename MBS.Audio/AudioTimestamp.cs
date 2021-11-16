@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MBS.Audio
 {
-	public struct AudioTimestamp
+	public struct AudioTimestamp : IComparable<AudioTimestamp>
 	{
 		public static AudioTimestamp FromSamples(long totalSamples, int samplesPerSecond)
 		{
@@ -31,8 +31,12 @@ namespace MBS.Audio
 
 		public static AudioTimestamp FromHMS(int hours, int minutes, int seconds, int milliseconds, int samplesPerSecond)
 		{
+			return FromHMS(0, hours, minutes, seconds, milliseconds, samplesPerSecond);
+		}
+		public static AudioTimestamp FromHMS(int days, int hours, int minutes, int seconds, int milliseconds, int samplesPerSecond)
+		{
 			AudioTimestamp timestamp = new AudioTimestamp();
-			timestamp.TotalSamples = (int)(((double)milliseconds / 100) + (seconds) + (minutes * 60) + (hours * 3600)) * samplesPerSecond;
+			timestamp.TotalSamples = (int)(((double)milliseconds / 100) + (seconds) + (minutes * 60) + (hours * 3600) + (days * 24 * 3600)) * samplesPerSecond;
 			timestamp.mvarSamplesPerSecond = samplesPerSecond;
 			timestamp._IsNotEmpty = true;
 			return timestamp;
@@ -156,6 +160,28 @@ namespace MBS.Audio
 
 			TimeSpan ts = new TimeSpan(days, hours, mins, secs, ms);
 			return ts;
+		}
+
+		public int CompareTo(AudioTimestamp other)
+		{
+			return this.ToTimeSpan().CompareTo(other.ToTimeSpan());
+		}
+
+		public static bool operator <(AudioTimestamp left, AudioTimestamp right)
+		{
+			return left.CompareTo(right) < 0;
+		}
+		public static bool operator >(AudioTimestamp left, AudioTimestamp right)
+		{
+			return left.CompareTo(right) > 0;
+		}
+		public static bool operator <=(AudioTimestamp left, AudioTimestamp right)
+		{
+			return left.CompareTo(right) <= 0;
+		}
+		public static bool operator >=(AudioTimestamp left, AudioTimestamp right)
+		{
+			return left.CompareTo(right) >= 0;
 		}
 	}
 }

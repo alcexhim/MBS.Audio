@@ -117,12 +117,12 @@ namespace MBS.Audio
 			if (ticksPerBeat == null) ticksPerBeat = other.TicksPerBeat;
 			if (ticksPerBeat == null) ticksPerBeat = 2000;
 
-			while (ticks >= ticksPerBeat)
+			while (ticks > ticksPerBeat)
 			{
 				beats++;
 				ticks -= (int)ticksPerBeat.GetValueOrDefault();
 			}
-			while (beats >= beatsPerBar)
+			while (beats > beatsPerBar)
 			{
 				bars++;
 				beats -= (int)beatsPerBar.GetValueOrDefault();
