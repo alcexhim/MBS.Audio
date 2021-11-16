@@ -81,6 +81,7 @@
     <Compile Include="PortAudio\PortAudioEngine.cs" />
     <Compile Include="AudioEngine.cs" />
     <Compile Include="Jack\JackAudioEngine.cs" />
+    <Compile Include="CustomTransport.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\UniversalEditor\Libraries\UniversalEditor.Essential\UniversalEditor.Essential.csproj">
