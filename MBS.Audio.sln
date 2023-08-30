@@ -1,13 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBS.Audio", "MBS.Audio\MBS.Audio.csproj", "{E0897B7B-617A-4709-A4C6-FC0F6B441B2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBS.Audio", "Libraries\MBS.Audio\MBS.Audio.csproj", "{E0897B7B-617A-4709-A4C6-FC0F6B441B2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBS.Audio.Metronome", "MBS.Audio.Metronome\MBS.Audio.Metronome.csproj", "{F6FEB13E-8622-4DBB-9A3C-C13FE68A1E3D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalEditor.Core", "..\UniversalEditor\Libraries\UniversalEditor.Core\UniversalEditor.Core.csproj", "{A92D520B-FFA3-4464-8CF6-474D18959E03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBS.Audio.Metronome", "Applications\MBS.Audio.Metronome\MBS.Audio.Metronome.csproj", "{F6FEB13E-8622-4DBB-9A3C-C13FE68A1E3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalEditor.Plugins.Multimedia", "..\UniversalEditor\Plugins\UniversalEditor.Plugins.Multimedia\UniversalEditor.Plugins.Multimedia.csproj", "{BE4D0BA3-0888-42A5-9C09-FC308A4509D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalEditor.Core", "..\UniversalEditor\Libraries\UniversalEditor.Core\UniversalEditor.Core.csproj", "{2D4737E6-6D95-408A-90DB-8DFF38147E85}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{ED97BAA4-69DF-444A-9DF6-F4F074F0A549}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{F26FF312-D551-4CD9-A19D-3BC15028918C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBS.Audio.MIDI", "Libraries\MBS.Audio.MIDI\MBS.Audio.MIDI.csproj", "{DDC1CE36-60E0-4B09-A288-CB14ACE252DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBS.Audio.MIDI.TestProject", "Applications\MBS.Audio.MIDI.TestProject\MBS.Audio.MIDI.TestProject.csproj", "{292D06E7-0EBD-461D-B46C-737360D2B670}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{D643CFB8-E7C9-4B5B-A90A-C7C3330E5259}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalEditor.Essential", "..\UniversalEditor\Libraries\UniversalEditor.Essential\UniversalEditor.Essential.csproj", "{30467E5C-05BC-4856-AADC-13906EF4CADD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalEditor.Checksum", "..\UniversalEditor\Libraries\UniversalEditor.Checksum\UniversalEditor.Checksum.csproj", "{0F7D5BD4-7970-412F-ABD7-0A098BB01ACE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalEditor.Compression", "..\UniversalEditor\Libraries\UniversalEditor.Compression\UniversalEditor.Compression.csproj", "{3F664673-7E22-4486-9AD0-FC81861D0B78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBS.Framework", "..\MBS.Framework\Libraries\MBS.Framework\MBS.Framework.csproj", "{00266B21-35C9-4A7F-A6BA-D54D7FDCC25C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,16 +41,52 @@ Global
 		{F6FEB13E-8622-4DBB-9A3C-C13FE68A1E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6FEB13E-8622-4DBB-9A3C-C13FE68A1E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6FEB13E-8622-4DBB-9A3C-C13FE68A1E3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A92D520B-FFA3-4464-8CF6-474D18959E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A92D520B-FFA3-4464-8CF6-474D18959E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A92D520B-FFA3-4464-8CF6-474D18959E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A92D520B-FFA3-4464-8CF6-474D18959E03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BE4D0BA3-0888-42A5-9C09-FC308A4509D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BE4D0BA3-0888-42A5-9C09-FC308A4509D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE4D0BA3-0888-42A5-9C09-FC308A4509D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE4D0BA3-0888-42A5-9C09-FC308A4509D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D4737E6-6D95-408A-90DB-8DFF38147E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4737E6-6D95-408A-90DB-8DFF38147E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D4737E6-6D95-408A-90DB-8DFF38147E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4737E6-6D95-408A-90DB-8DFF38147E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC1CE36-60E0-4B09-A288-CB14ACE252DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC1CE36-60E0-4B09-A288-CB14ACE252DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC1CE36-60E0-4B09-A288-CB14ACE252DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC1CE36-60E0-4B09-A288-CB14ACE252DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{292D06E7-0EBD-461D-B46C-737360D2B670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{292D06E7-0EBD-461D-B46C-737360D2B670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{292D06E7-0EBD-461D-B46C-737360D2B670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{292D06E7-0EBD-461D-B46C-737360D2B670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30467E5C-05BC-4856-AADC-13906EF4CADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30467E5C-05BC-4856-AADC-13906EF4CADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30467E5C-05BC-4856-AADC-13906EF4CADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30467E5C-05BC-4856-AADC-13906EF4CADD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F7D5BD4-7970-412F-ABD7-0A098BB01ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F7D5BD4-7970-412F-ABD7-0A098BB01ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F7D5BD4-7970-412F-ABD7-0A098BB01ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F7D5BD4-7970-412F-ABD7-0A098BB01ACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F664673-7E22-4486-9AD0-FC81861D0B78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F664673-7E22-4486-9AD0-FC81861D0B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F664673-7E22-4486-9AD0-FC81861D0B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F664673-7E22-4486-9AD0-FC81861D0B78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00266B21-35C9-4A7F-A6BA-D54D7FDCC25C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00266B21-35C9-4A7F-A6BA-D54D7FDCC25C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00266B21-35C9-4A7F-A6BA-D54D7FDCC25C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00266B21-35C9-4A7F-A6BA-D54D7FDCC25C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F6FEB13E-8622-4DBB-9A3C-C13FE68A1E3D} = {ED97BAA4-69DF-444A-9DF6-F4F074F0A549}
+		{E0897B7B-617A-4709-A4C6-FC0F6B441B2A} = {F26FF312-D551-4CD9-A19D-3BC15028918C}
+		{DDC1CE36-60E0-4B09-A288-CB14ACE252DD} = {F26FF312-D551-4CD9-A19D-3BC15028918C}
+		{292D06E7-0EBD-461D-B46C-737360D2B670} = {ED97BAA4-69DF-444A-9DF6-F4F074F0A549}
+		{2D4737E6-6D95-408A-90DB-8DFF38147E85} = {D643CFB8-E7C9-4B5B-A90A-C7C3330E5259}
+		{BE4D0BA3-0888-42A5-9C09-FC308A4509D2} = {D643CFB8-E7C9-4B5B-A90A-C7C3330E5259}
+		{30467E5C-05BC-4856-AADC-13906EF4CADD} = {D643CFB8-E7C9-4B5B-A90A-C7C3330E5259}
+		{0F7D5BD4-7970-412F-ABD7-0A098BB01ACE} = {D643CFB8-E7C9-4B5B-A90A-C7C3330E5259}
+		{3F664673-7E22-4486-9AD0-FC81861D0B78} = {D643CFB8-E7C9-4B5B-A90A-C7C3330E5259}
+		{00266B21-35C9-4A7F-A6BA-D54D7FDCC25C} = {D643CFB8-E7C9-4B5B-A90A-C7C3330E5259}
 	EndGlobalSection
 EndGlobal

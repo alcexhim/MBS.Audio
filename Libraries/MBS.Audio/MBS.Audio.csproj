@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E0897B7B-617A-4709-A4C6-FC0F6B441B2A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MBS.Audio</RootNamespace>
+    <AssemblyName>MBS.Audio</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Output\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Output\Release</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Internal\PortAudio\Constants.cs" />
+    <Compile Include="Internal\PortAudio\Delegates.cs" />
+    <Compile Include="Internal\PortAudio\Linux\Methods.cs" />
+    <Compile Include="Internal\PortAudio\Methods.cs" />
+    <Compile Include="Internal\PortAudio\Structures.cs" />
+    <Compile Include="Internal\PortAudio\Windows\Methods.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Jack\JackClient.cs" />
+    <Compile Include="Jack\JackOpenOptions.cs" />
+    <Compile Include="Jack\Internal\Methods.cs" />
+    <Compile Include="Jack\Internal\Constants.cs" />
+    <Compile Include="Jack\JackPort.cs" />
+    <Compile Include="Jack\JackPortFlags.cs" />
+    <Compile Include="Jack\JackInputPort.cs" />
+    <Compile Include="Jack\JackOutputPort.cs" />
+    <Compile Include="Jack\JackPortTypes.cs" />
+    <Compile Include="Jack\JackTransport.cs" />
+    <Compile Include="Jack\JackTransportState.cs" />
+    <Compile Include="Jack\Internal\Structures.cs" />
+    <Compile Include="Jack\ServerException.cs" />
+    <Compile Include="Jack\JackException.cs" />
+    <Compile Include="Jack\VersionMismatchException.cs" />
+    <Compile Include="Jack\JackPortRegisteredEvent.cs" />
+    <Compile Include="Jack\Internal\Delegates.cs" />
+    <Compile Include="Jack\JackProcessEvent.cs" />
+    <Compile Include="Jack\Networking\JackNetworkSlave.cs" />
+    <Compile Include="Jack\Networking\Internal\Methods.cs" />
+    <Compile Include="Jack\Networking\Internal\Structures.cs" />
+    <Compile Include="Jack\Networking\Internal\Constants.cs" />
+    <Compile Include="PortAudio\PortAudioDevice.cs" />
+    <Compile Include="PortAudio\PortAudioStream.cs" />
+    <Compile Include="ITransport.cs" />
+    <Compile Include="BarBeatTick.cs" />
+    <Compile Include="AudioTimestamp.cs" />
+    <Compile Include="AudioPlayerState.cs" />
+    <Compile Include="AudioPlayerStateChangedEvent.cs" />
+    <Compile Include="AudioPlayerStateChangedReason.cs" />
+    <Compile Include="AudioSampleFormat.cs" />
+    <Compile Include="PortAudio\PortAudioEngine.cs" />
+    <Compile Include="AudioEngine.cs" />
+    <Compile Include="Jack\JackAudioEngine.cs" />
+    <Compile Include="CustomTransport.cs" />
+    <Compile Include="Metronome\Metronome.cs" />
+    <Compile Include="AudioDevice.cs" />
+    <Compile Include="AudioStream.cs" />
+    <Compile Include="AudioStreamFlags.cs" />
+    <Compile Include="PortAudio\PortAudioStreamFlags.cs" />
+    <Compile Include="AudioPlayer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\UniversalEditor\Libraries\UniversalEditor.Essential\UniversalEditor.Essential.csproj">
+      <Project>{30467E5C-05BC-4856-AADC-13906EF4CADD}</Project>
+      <Name>UniversalEditor.Essential</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UniversalEditor\Plugins\UniversalEditor.Plugins.Multimedia\UniversalEditor.Plugins.Multimedia.csproj">
+      <Project>{BE4D0BA3-0888-42A5-9C09-FC308A4509D2}</Project>
+      <Name>UniversalEditor.Plugins.Multimedia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UniversalEditor\Libraries\UniversalEditor.Core\UniversalEditor.Core.csproj">
+      <Project>{2D4737E6-6D95-408A-90DB-8DFF38147E85}</Project>
+      <Name>UniversalEditor.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Jack\" />
+    <Folder Include="Jack\Internal\" />
+    <Folder Include="Jack\Networking\" />
+    <Folder Include="Jack\Networking\Internal\" />
+    <Folder Include="PortAudio\" />
+    <Folder Include="Metronome\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
